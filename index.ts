@@ -36,7 +36,7 @@ const PORT = process.env.PORT || 5000;
 
 const Boostrap = async function () {
   try {
-      await DbInitialize();
+    await DbInitialize();
     app.listen(PORT, () => {
       console.log('Connection has been established successfully.');
     });
