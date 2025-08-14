@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 import cors from 'cors';
 import DbInitialize from './src/database/init';
-import userRouter from './src/router/user-router';
+import UserRouter from './src/router/user-router';
 
 //create an app
 const app = express();
@@ -30,7 +30,7 @@ app.use((err: TypeError, req: Request, res: Response, next: NextFunction) => {
 
 
 
-app.use('/api/user', userRouter);
+app.use('/api/user', UserRouter);
 // app.use('/api/account', AccountRouter);
 // app.use('/api/transaction', TransactionRouter);
 // app.use('/api/admin', AdminRouter);
