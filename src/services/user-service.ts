@@ -1,13 +1,26 @@
+import UserDataSource from '../datasources/user-datasource';
+import { IFindUserQuery, IUser, IUserCreationBody, IUserDataSource } from '../interfaces/user-interface';
+
+
 // class UserService {
 //     constructor () {}
 // }
 
-
-
-
 class UserService {
-    constructor () {}
+ private userDataSource: UserDataSource;
+
+  constructor(_userDataSource: UserDataSource) {
+    this.userDataSource = _userDataSource;
+  }
+
+  async getUserByField(record: Partial<IUser>): Promise<IUser | null> {
+    const query = { where: { ...record }, raw: true } as IFindUserQuery;
+    return this.userDataSource.fetchOne(query);
+  }
+
+   async createUser(record: IUserCreationBody) {
+    return this.userDataSource.create(record);
+  }
 }
 
-
-export default UserService
+export default UserService;
