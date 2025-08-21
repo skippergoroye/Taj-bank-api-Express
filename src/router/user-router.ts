@@ -1,6 +1,8 @@
 import express, { Request, Response } from 'express';
 import UserController from '../controllers/user-contollers';
 import UserService from '../services/user-service';
+import { validator } from '../middlewares/index.middleware';
+import ValidationSchema from '../validator/user-validator-schema';
 
 
 
@@ -11,7 +13,7 @@ const createUserRoute = () => {
   const userService = new UserService()
   const userController = new UserController(userService)
 
-  router.post("/register", (req: Request, res: Response) => {
+  router.post("/register", validator(ValidationSchema.registerSchema), (req: Request, res: Response) => {
     return userController.register(req, res)
   })
 

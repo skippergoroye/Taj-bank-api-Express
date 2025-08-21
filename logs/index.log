@@ -1,0 +1,12 @@
+2025-08-21 08:50:44 error : firstname is a required field 
+2025-08-21 08:51:19 error : firstname is a required field 
+2025-08-21 08:51:21 error : firstname is a required field 
+2025-08-21 08:51:26 error : firstname is a required field 
+2025-08-21 08:53:09 error : firstname is a required field 
+2025-08-21 08:53:11 error : firstname is a required field 
+2025-08-21 08:53:47 error : firstname is a required field 
+2025-08-21 08:53:49 error : firstname is a required field 
+2025-08-21 08:53:50 error : firstname is a required field 
+2025-08-21 08:55:00 error : lastname is a required field 
+2025-08-21 08:55:03 error : lastname is a required field 
+2025-08-21 08:55:09 error : email must be a valid email 
