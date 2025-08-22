@@ -1,6 +1,7 @@
 #
 Installations
 1. npm install pg pg-hstore
+2. npm i jsonwebtoken @types/jsonwebtoken
 
 
 

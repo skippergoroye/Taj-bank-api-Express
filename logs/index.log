@@ -10,3 +10,4 @@
 2025-08-21 08:55:00 error : lastname is a required field 
 2025-08-21 08:55:03 error : lastname is a required field 
 2025-08-21 08:55:09 error : email must be a valid email 
+2025-08-21 10:02:55 error : Email already exists 

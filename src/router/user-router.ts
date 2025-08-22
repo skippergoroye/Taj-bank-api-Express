@@ -19,9 +19,10 @@ const createUserRoute = () => {
   })
 
 
-  router.post("/login", (req: Request, res: Response) => {
-     return userController.login(req, res)
-  })
+
+  router.post('/login', validator(ValidationSchema.loginSchema), (req: Request, res: Response) => {
+    return userController.login(req, res);
+  });
 
 
 

@@ -5,6 +5,7 @@ import { IUserCreationBody } from "../interfaces/user-interface";
 import bcrypt from "bcrypt";
 import Utility from "../utils/index.utils";
 import { ResponseCode } from "../interfaces/enum/code-enum";
+import JWT from "jsonwebtoken";
 
 class UserController {
   private userService: UserService;
@@ -49,18 +50,41 @@ class UserController {
       user.password = "";
       return Utility.handleSuccess(res, "User registered successfully", { user }, ResponseCode.SUCCESS);
 
-
-      res.send({ message: "Resgistration succesful" });
     } catch (error) {
-      res.send({ message: "Server Error" });
+        return Utility.handleError(res, (error as TypeError).message, ResponseCode.SERVER_ERROR);
     }
   }
 
-  async login(req: Request, res: Response) {
+ async login(req: Request, res: Response) {
     try {
-      res.send({ message: "Login succesful" });
+      const params = { ...req.body };
+      let user = await this.userService.getUserByField({ email: params.email });
+      if (!user) {
+        return Utility.handleError(res, "Invalid login detail", ResponseCode.NOT_FOUND);
+      }
+
+      let isPasswordMatch = await bcrypt.compare(params.password, user.password);
+
+      if (!isPasswordMatch) {
+        return Utility.handleError(res, "Invalid login detail", ResponseCode.NOT_FOUND);
+      }
+
+      const token = JWT.sign(
+        {
+          firstname: user.firstname,
+          lastname: user.lastname,
+          id: user.id,
+          email: user.email,
+          role: user.role,
+        },
+        process.env.JWT_KEY as string,
+        {
+          expiresIn: "30d",
+        }
+      );
+      return Utility.handleSuccess(res, "Login Successful", { user, token }, ResponseCode.SUCCESS);
     } catch (error) {
-      res.send({ message: "Server Error" });
+      return Utility.handleError(res, (error as TypeError).message, ResponseCode.SERVER_ERROR);
     }
   }
 
