@@ -11,3 +11,6 @@
 2025-08-21 08:55:03 error : lastname is a required field 
 2025-08-21 08:55:09 error : email must be a valid email 
 2025-08-21 10:02:55 error : Email already exists 
+2025-08-26 09:47:14 error : Account does not exist 
+2025-08-26 09:47:26 error : Account does not exist 
+2025-08-26 09:47:27 error : Account does not exist 

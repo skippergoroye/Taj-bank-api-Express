@@ -1,17 +1,25 @@
 import { Request, Response } from "express";
 import UserService from "../services/user-service";
-import { AccountStatus, EmailStatus, UserRoles } from "../interfaces/enum/user-enum";
+import {
+  AccountStatus,
+  EmailStatus,
+  UserRoles,
+} from "../interfaces/enum/user-enum";
 import { IUserCreationBody } from "../interfaces/user-interface";
 import bcrypt from "bcrypt";
 import Utility from "../utils/index.utils";
 import { ResponseCode } from "../interfaces/enum/code-enum";
 import JWT from "jsonwebtoken";
+import { IToken } from "../interfaces/token-interface";
+import TokenService from "../services/token-service";
 
 class UserController {
   private userService: UserService;
+  private tokenService: TokenService;
 
-  constructor(_userService: UserService) {
+  constructor(_userService: UserService, _tokenService: TokenService) {
     this.userService = _userService;
+    this.tokenService = _tokenService;
   }
 
   //-- structure the data
@@ -34,7 +42,6 @@ class UserController {
         accountStatus: AccountStatus.ACTIVE,
       } as IUserCreationBody;
 
-
       newUser.password = bcrypt.hashSync(newUser.password, 10);
 
       let userExists = await this.userService.getUserByField({
@@ -42,31 +49,53 @@ class UserController {
       });
 
       if (userExists) {
-        return Utility.handleError(res, "Email already exists", ResponseCode.ALREADY_EXIST);
+        return Utility.handleError(
+          res,
+          "Email already exists",
+          ResponseCode.ALREADY_EXIST
+        );
       }
 
-
-       let user = await this.userService.createUser(newUser);
+      let user = await this.userService.createUser(newUser);
       user.password = "";
-      return Utility.handleSuccess(res, "User registered successfully", { user }, ResponseCode.SUCCESS);
-
+      return Utility.handleSuccess(
+        res,
+        "User registered successfully",
+        { user },
+        ResponseCode.SUCCESS
+      );
     } catch (error) {
-        return Utility.handleError(res, (error as TypeError).message, ResponseCode.SERVER_ERROR);
+      return Utility.handleError(
+        res,
+        (error as TypeError).message,
+        ResponseCode.SERVER_ERROR
+      );
     }
   }
 
- async login(req: Request, res: Response) {
+  async login(req: Request, res: Response) {
     try {
       const params = { ...req.body };
       let user = await this.userService.getUserByField({ email: params.email });
       if (!user) {
-        return Utility.handleError(res, "Invalid login detail", ResponseCode.NOT_FOUND);
+        return Utility.handleError(
+          res,
+          "Invalid login detail",
+          ResponseCode.NOT_FOUND
+        );
       }
 
-      let isPasswordMatch = await bcrypt.compare(params.password, user.password);
+      let isPasswordMatch = await bcrypt.compare(
+        params.password,
+        user.password
+      );
 
       if (!isPasswordMatch) {
-        return Utility.handleError(res, "Invalid login detail", ResponseCode.NOT_FOUND);
+        return Utility.handleError(
+          res,
+          "Invalid login detail",
+          ResponseCode.NOT_FOUND
+        );
       }
 
       const token = JWT.sign(
@@ -82,17 +111,49 @@ class UserController {
           expiresIn: "30d",
         }
       );
-      return Utility.handleSuccess(res, "Login Successful", { user, token }, ResponseCode.SUCCESS);
+      return Utility.handleSuccess(
+        res,
+        "Login Successful",
+        { user, token },
+        ResponseCode.SUCCESS
+      );
     } catch (error) {
-      return Utility.handleError(res, (error as TypeError).message, ResponseCode.SERVER_ERROR);
+      return Utility.handleError(
+        res,
+        (error as TypeError).message,
+        ResponseCode.SERVER_ERROR
+      );
     }
   }
 
   async forgotPassword(req: Request, res: Response) {
     try {
-      res.send({ message: "Forgot Password mail sent" });
+      const params = { ...req.body };
+      let user = await this.userService.getUserByField({ email: params.email });
+      if (!user) {
+        return Utility.handleError(
+          res,
+          "Account does not exist",
+          ResponseCode.NOT_FOUND
+        );
+      }
+
+      const token = (await this.tokenService.createForgotPasswordToken(
+        params.email
+      )) as IToken;
+      // await EmailService.sendForgotPasswordMail(params.email, token.code);
+      return Utility.handleSuccess(
+        res,
+        "Password reset code has been sent to your mail ",
+        {},
+        ResponseCode.SUCCESS
+      );
     } catch (error) {
-      res.send({ message: "Server Error" });
+      return Utility.handleError(
+        res,
+        (error as TypeError).message,
+        ResponseCode.SERVER_ERROR
+      );
     }
   }
 
