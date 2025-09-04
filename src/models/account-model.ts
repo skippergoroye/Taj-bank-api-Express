@@ -1,4 +1,4 @@
-import Db from '../database';
+ import Db from '../database';
 import { IAccountModel } from '../interfaces/account-interface';
 import { DataTypes } from 'sequelize';
 import { v4 as uuidv4 } from 'uuid';

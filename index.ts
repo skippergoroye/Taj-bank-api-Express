@@ -1,3 +1,4 @@
+import "reflect-metadata"
 import express, { Request, Response, Express, NextFunction } from 'express';
 import dotenv from 'dotenv';
 dotenv.config();
@@ -5,8 +6,15 @@ import cors from 'cors';
 import morgan from 'morgan';
 import DbInitialize from './src/database/init';
 import UserRouter from './src/router/user-router';
-
+import accountRouter from "./src/router/account-router";
+import { container } from 'tsyringe';
+import UserService from "./src/services/user-service";
+// import UserService from './services/user.service';
 //create an app
+
+
+
+
 const app = express();
 
 
@@ -35,7 +43,7 @@ app.use((err: TypeError, req: Request, res: Response, next: NextFunction) => {
 
 
 app.use('/api/user', UserRouter);
-// app.use('/api/account', AccountRouter);
+app.use('/api/account', accountRouter);
 // app.use('/api/transaction', TransactionRouter);
 // app.use('/api/admin', AdminRouter);
 
