@@ -34,9 +34,9 @@ const createUserRoute = () => {
   });
 
 
-  router.post("/reset-password", (req: Request, res: Response) => {
-    return userController.resetPassword(req, res)
-  })
+ router.post('/reset-password',validator(ValidationSchema.resetPasswordSchema) ,  (req: Request, res: Response) => {
+    return userController.resetPassword(req, res);
+  });
 
   return router;
 };
