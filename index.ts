@@ -2,6 +2,7 @@ import express, { Request, Response, Express, NextFunction } from 'express';
 import dotenv from 'dotenv';
 dotenv.config();
 import cors from 'cors';
+import morgan from 'morgan';
 import DbInitialize from './src/database/init';
 import UserRouter from './src/router/user-router';
 
@@ -14,6 +15,9 @@ app.use(
     origin: '*',
   })
 );
+
+
+app.use(morgan('dev')); // 👈 logs requests in "dev" format
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
