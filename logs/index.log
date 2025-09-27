@@ -17,3 +17,22 @@
 2025-09-04 08:42:10 error : Token has expired 
 2025-09-04 08:44:16 error : Invalid login detail 
 2025-09-04 08:44:23 error : Token has expired 
+2025-09-27 01:16:58 error : Email already exists 
+2025-09-27 12:07:00 error : Authorization failed 
+2025-09-27 12:09:18 error : invalid signature 
+2025-09-27 12:11:49 error : invalid signature 
+2025-09-27 12:13:51 error : Invalid login detail 
+2025-09-27 12:14:07 error : Invalid login detail 
+2025-09-27 12:14:09 error : Invalid login detail 
+2025-09-27 12:14:11 error : Invalid login detail 
+2025-09-27 12:14:13 error : Invalid login detail 
+2025-09-27 12:14:15 error : Invalid login detail 
+2025-09-27 12:14:23 error : Invalid login detail 
+2025-09-27 12:16:37 error : Cannot read properties of undefined (reading 'getAccountsByUserId') 
+2025-09-27 12:17:47 error : Cannot read properties of undefined (reading 'getAccountsByUserId') 
+2025-09-27 12:28:47 error : Cannot read properties of undefined (reading 'getAccountsByUserId') 
+2025-09-27 12:28:49 error : Cannot read properties of undefined (reading 'getAccountsByUserId') 
+2025-09-27 12:28:51 error : Cannot read properties of undefined (reading 'getAccountsByUserId') 
+2025-09-27 12:28:55 error : Authorization failed 
+2025-09-27 12:29:03 error : Cannot read properties of undefined (reading 'getAccountsByUserId') 
+2025-09-27 12:32:59 error : Authorization failed 

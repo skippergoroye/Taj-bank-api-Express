@@ -4,7 +4,6 @@ import sequelize from "../database";
 import AccountDataSource from "../datasources/account-datasource";
 import { AccountStatus } from "../interfaces/enum/user-enum";
 
-
 class AccountService {
   private accountDataSource: AccountDataSource;
 
