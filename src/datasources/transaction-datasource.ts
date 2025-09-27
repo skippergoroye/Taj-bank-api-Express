@@ -3,8 +3,6 @@ import { IFindTransactionQuery, ITransaction, ITransactionCreationBody, ITransac
 import TransactionModel from '../models/transaction-model';
 
 class TransactionDataSource implements ITransactionDataSource {
-  
-  
   async create(record: ITransactionCreationBody , options?: Partial<IFindTransactionQuery>): Promise<ITransaction>{
     return await TransactionModel.create(record,{returning:true , ...options});
   }
@@ -24,7 +22,6 @@ class TransactionDataSource implements ITransactionDataSource {
   async fetchSum(field: keyof ITransaction,query: IFindTransactionQuery) : Promise<number>{
     return await TransactionModel.sum(field,query);
   }
-
 }
 
 export default TransactionDataSource;

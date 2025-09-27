@@ -36,3 +36,6 @@
 2025-09-27 12:28:55 error : Authorization failed 
 2025-09-27 12:29:03 error : Cannot read properties of undefined (reading 'getAccountsByUserId') 
 2025-09-27 12:32:59 error : Authorization failed 
+2025-09-27 17:09:56 error : Authorization failed 
+2025-09-27 17:10:10 error : Paystack payment not available , try again in few seconds 
+2025-09-27 17:12:05 error : Paystack payment not available , try again in few seconds 

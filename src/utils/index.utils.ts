@@ -1,5 +1,6 @@
 import { Response } from 'express';
 import { createLogger , format , info, transport, transports } from 'winston';
+import { BANKS } from '../interfaces/enum/payee-enum';
 // import { BANKS } from '../interfaces/enum/payee-enum';
 
 const printRed = (text: string) => {
@@ -62,13 +63,13 @@ const parseToObject = (value: string): any => {
 }
 
 
-// const getBankName = (bankCode:string): string =>{
-//   const filter = BANKS.filter(item => (item.code == bankCode));
-//   if(filter.length > 0){
-//     return filter[0].name;
-//   }
-//   return '';
-// }
+const getBankName = (bankCode:string): string =>{
+  const filter = BANKS.filter(item => (item.code == bankCode));
+  if(filter.length > 0){
+    return filter[0].name;
+  }
+  return '';
+}
 
 
 const Utility = {
@@ -79,7 +80,7 @@ const Utility = {
   isEmpty,
   escapeHtml,
   parseToObject,
-  // getBankName
+  getBankName
 };
 
 export default Utility;

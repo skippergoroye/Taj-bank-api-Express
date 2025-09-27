@@ -48,7 +48,7 @@ class AccountController {
   async getUserAccount(req: Request, res: Response) {
     try {
       const params = { ...req.params };
-      let account = await this.accountService.getAccountByField({id: params.id})
+      let account = await this.accountService.getAccountByField({id: Utility.escapeHtml(params.id)})
 
 
       if(!account){

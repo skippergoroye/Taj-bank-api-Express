@@ -9,6 +9,7 @@ import UserRouter from './src/router/user-router';
 import accountRouter from "./src/router/account-router";
 import { container } from 'tsyringe';
 import UserService from "./src/services/user-service";
+import transactionRouter from "./src/router/transaction-router";
 // import UserService from './services/user.service';
 //create an app
 
@@ -44,7 +45,7 @@ app.use((err: TypeError, req: Request, res: Response, next: NextFunction) => {
 
 app.use('/api/user', UserRouter);
 app.use('/api/account', accountRouter);
-// app.use('/api/transaction', TransactionRouter);
+app.use('/api/transaction', transactionRouter);
 // app.use('/api/admin', AdminRouter);
 
 
