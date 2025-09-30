@@ -24,9 +24,9 @@ const createTransactionRoute = () => {
     return transactionController.initiatePaystackDeposit(req, res);
   });
 
-  // router.post("/verify-paystack-deposit", validator(ValidationSchema.verifyPaystackDeposit),Auth() , (req: Request, res: Response) => {
-  //   return transactionController.verifyPaystackDeposit(req, res);
-  // });
+  router.post("/verify-paystack-deposit", validator(ValidationSchema.verifyPaystackDeposit),Auth() , (req: Request, res: Response) => {
+    return transactionController.verifyPaystackDeposit(req, res);
+  });
 
   // router.post("/make-transfer", validator(ValidationSchema.makeInternalTransferSchema), Auth(), (req: Request, res: Response) => {
   //   return transactionController.internalTransfer(req, res);

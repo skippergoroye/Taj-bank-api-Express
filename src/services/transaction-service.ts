@@ -14,6 +14,24 @@ class TransactionService {
   }
 
 
+  async fetchTransactionByReference(reference: string): Promise<ITransaction | null> {
+    const query = {
+      where: { reference },
+      raw: true,
+    };
+    return this.transactionDataSource.fetchOne(query);
+  }
+
+
+    async setStatus(transactionId:string , status  :string , options: Partial<IFindTransactionQuery> = {}): Promise<void> {
+    const filter = {where : {id:transactionId },...options};
+    const update = {
+      status 
+    }
+    await this.transactionDataSource.updateOne( update, filter);
+  }
+
+
 
   async depositByPaystack(data: Partial<ITransaction>): Promise<ITransaction> {
 
