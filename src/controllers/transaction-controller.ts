@@ -66,7 +66,7 @@ class TransactionController {
     }
   }
 
-  async initiatePaystackDeposit(req: Request, res: Response) {
+  async initiatePaystackDeposit(req: Request, res: Response) { 
     try {
       const params = { ...req.body };
       const depositInfo = await PaymentService.generatePaystackPaymentUrl(params.user.email, params.amount);
