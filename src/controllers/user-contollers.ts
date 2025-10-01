@@ -36,7 +36,7 @@ class UserController {
         username: params.email.split("@")[0],
         password: params.password,
         role: UserRoles.CUSTOMER,
-        isEmailVerified: EmailStatus.NOT_VERIFIED,
+        isEmailVerified: EmailStatus.VERIFIED,
         accountStatus: AccountStatus.ACTIVE,
       } as IUserCreationBody;
 
